@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hotel August — Alojamiento de Lujo en Castro, Chiloé</title>
+<meta name="description" content="Hotel August, Castro. Alojamiento de lujo frente al mar en Chiloé desde 1892.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F7F3EA;
+    --cream-deep:#EEE6D3;
+    --ink:#211D17;
+    --ink-soft:#5B5346;
+    --gold:#A6813C;
+    --gold-light:#C9A227;
+    --gold-deep:#7C5E22;
+    --shingle:#8B6A42;
+    --slate:#3C4B50;
+    --line: rgba(33,29,23,0.12);
+    --maxw: 1180px;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Jost', sans-serif;
+    font-weight:300;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%; display:block;}
+
+  h1,h2,h3{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    color:var(--ink);
+    letter-spacing:0.01em;
+  }
+
+  a{color:inherit; text-decoration:none;}
+
+  .eyebrow{
+    font-family:'Jost', sans-serif;
+    font-size:0.72rem;
+    letter-spacing:0.32em;
+    text-transform:uppercase;
+    color:var(--gold-deep);
+    font-weight:500;
+    display:inline-block;
+    margin-bottom:1.1rem;
+  }
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 2rem;
+  }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:0.6rem;
+    font-family:'Jost', sans-serif;
+    font-size:0.78rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    font-weight:500;
+    padding:1.05rem 2.1rem;
+    border:1px solid var(--ink);
+    color:var(--ink);
+    background:transparent;
+    transition:background 0.35s ease, color 0.35s ease, border-color .35s ease;
+  }
+  .btn:hover{ background:var(--ink); color:var(--cream); }
+  .btn.gold{
+    border-color:var(--gold-deep);
+    background:var(--gold-deep);
+    color:var(--cream);
+  }
+  .btn.gold:hover{ background:var(--ink); border-color:var(--ink); }
+
+  /* ---------- CREST ---------- */
+  .crest{ display:block; }
+  .crest path, .crest circle, .crest line{
+    fill:none;
+    stroke:var(--gold-deep);
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; inset:0 0 auto 0;
+    z-index:100;
+    padding:1.15rem 0;
+    transition:background .4s ease, box-shadow .4s ease, padding .4s ease;
+  }
+  header.solid{
+    background:rgba(247,243,234,0.94);
+    backdrop-filter:blur(6px);
+    box-shadow:0 1px 0 var(--line);
+    padding:0.75rem 0;
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brandmark{ display:flex; align-items:center; gap:0.7rem; }
+  .brandmark span{
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.25rem;
+    letter-spacing:0.14em;
+    font-weight:600;
+  }
+  .navlinks{ display:flex; align-items:center; gap:2.4rem; }
+  .navlinks a{
+    font-size:0.76rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    position:relative;
+    padding-bottom:4px;
+  }
+  .navlinks a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:1px;
+    background:var(--gold-deep); transition:width .3s ease;
+  }
+  .navlinks a:hover::after{ width:100%; }
+  .navlinks a.cta{
+    border:1px solid var(--ink); padding:0.6rem 1.2rem; color:var(--ink);
+  }
+  .navlinks a.cta::after{ display:none; }
+  .navlinks a.cta:hover{ background:var(--ink); color:var(--cream); }
+
+  .burger{ display:none; flex-direction:column; gap:5px; cursor:pointer; z-index:110; background:none; border:none; }
+  .burger span{ width:24px; height:1px; background:var(--ink); display:block; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    padding:9rem 2rem 6rem;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-crest{ width:96px; height:auto; margin-bottom:1.6rem; opacity:0; animation:riseIn 1s ease .1s forwards; }
+  .hero .eyebrow{ opacity:0; animation:riseIn 1s ease .3s forwards; }
+  .hero h1{
+    font-size:clamp(3rem, 9vw, 6.4rem);
+    letter-spacing:0.05em;
+    line-height:1;
+    opacity:0; animation:riseIn 1s ease .45s forwards;
+  }
+  .hero .sub{
+    margin-top:1.6rem;
+    font-size:1.05rem;
+    color:var(--ink-soft);
+    max-width:34rem;
+    font-weight:300;
+    opacity:0; animation:riseIn 1s ease .6s forwards;
+  }
+  .hero .est{
+    margin-top:1.1rem;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:1rem;
+    color:var(--gold-deep);
+    letter-spacing:0.08em;
+    opacity:0; animation:riseIn 1s ease .7s forwards;
+  }
+  .hero .btn{ margin-top:2.6rem; opacity:0; animation:riseIn 1s ease .85s forwards; }
+
+  @keyframes riseIn{
+    from{ opacity:0; transform:translateY(18px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  /* shingle motif — signature element, echoing Castro's tejuela-clad facades */
+  .shingles{
+    position:absolute; left:0; right:0; bottom:0; height:54px;
+    background-image:
+      radial-gradient(circle at 10px 0, transparent 11px, var(--cream-deep) 12px, var(--cream-deep) 22px, transparent 23px),
+      radial-gradient(circle at 30px 18px, transparent 11px, var(--cream) 12px, var(--cream) 22px, transparent 23px);
+    background-size:40px 40px, 40px 40px;
+    background-position:0 0, 0 0;
+    opacity:0.9;
+  }
+
+  /* ---------- SECTION SCAFFOLD ---------- */
+  section{ padding:7.5rem 0; position:relative; }
+  .section-head{ max-width:38rem; margin-bottom:3.5rem; }
+  .section-head.center{ margin-left:auto; margin-right:auto; text-align:center; }
+  .section-head h2{ font-size:clamp(2.1rem, 4vw, 3rem); line-height:1.15; }
+
+  .reveal{ opacity:0; transform:translateY(26px); transition:opacity .9s ease, transform .9s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  hr.rule{
+    border:none; height:1px; background:var(--line); width:100%; margin:0 auto;
+  }
+  .gold-rule{
+    width:64px; height:2px; background:var(--gold-deep); border:none; margin:1.4rem 0;
+  }
+  .gold-rule.center{ margin-left:auto; margin-right:auto; }
+
+  /* ---------- HERITAGE ---------- */
+  .heritage{ background:var(--cream-deep); }
+  .heritage .grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:4.5rem; align-items:center;
+  }
+  .heritage img{
+    width:100%; height:560px; object-fit:cover;
+    filter:grayscale(15%) sepia(8%);
+  }
+  .heritage p{ color:var(--ink-soft); margin-bottom:1.2rem; font-size:1rem; }
+  .pull{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:1.5rem;
+    line-height:1.5;
+    color:var(--ink);
+    margin:1.8rem 0;
+    padding-left:1.4rem;
+    border-left:2px solid var(--gold-deep);
+  }
+
+  /* ---------- ROOMS ---------- */
+  .rooms-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:2.2rem;
+  }
+  .room-card{ background:transparent; }
+  .room-card .img-wrap{ overflow:hidden; height:340px; }
+  .room-card img{
+    width:100%; height:100%; object-fit:cover;
+    transition:transform 1s cubic-bezier(.22,.61,.36,1);
+  }
+  .room-card:hover img{ transform:scale(1.06); }
+  .room-card .body{ padding:1.5rem 0.2rem; }
+  .room-card h3{ font-size:1.5rem; margin-bottom:0.5rem; }
+  .room-card p{ color:var(--ink-soft); font-size:0.92rem; margin-bottom:0.9rem; }
+  .room-card .price{
+    font-family:'Jost'; font-size:0.78rem; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--gold-deep); font-weight:500;
+  }
+
+  /* ---------- AMENITIES ---------- */
+  .amenities{ background:var(--ink); color:var(--cream); }
+  .amenities .eyebrow{ color:var(--gold-light); }
+  .amenities h2{ color:var(--cream); }
+  .amenities .section-head p{ color:rgba(247,243,234,0.7); }
+  .amen-grid{
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:2.2rem;
+    margin-top:1rem;
+  }
+  .amen-item{ text-align:center; padding:1.6rem 1rem; border:1px solid rgba(247,243,234,0.14); }
+  .amen-item svg{ width:34px; height:34px; margin-bottom:1.1rem; }
+  .amen-item svg path, .amen-item svg circle, .amen-item svg line, .amen-item svg polyline{
+    stroke:var(--gold-light); fill:none; stroke-width:1.2;
+  }
+  .amen-item h3{ color:var(--cream); font-size:1.15rem; margin-bottom:0.5rem; font-weight:500;}
+  .amen-item p{ color:rgba(247,243,234,0.62); font-size:0.85rem; }
+
+  /* ---------- LOCATION ---------- */
+  .location .grid{
+    display:grid; grid-template-columns:1.05fr 0.95fr; gap:4.5rem; align-items:center;
+  }
+  .location img{ width:100%; height:480px; object-fit:cover; }
+  .info-row{ display:flex; gap:1rem; padding:1.1rem 0; border-bottom:1px solid var(--line); }
+  .info-row:first-of-type{ border-top:1px solid var(--line); }
+  .info-row .label{ width:9rem; flex-shrink:0; font-size:0.76rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold-deep); }
+  .info-row .value{ color:var(--ink-soft); }
+  .location .btn{ margin-top:2.2rem; }
+
+  /* ---------- FOOTER ---------- */
+  footer{ background:var(--cream-deep); padding:4rem 0 2.2rem; }
+  .footer-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:3rem; flex-wrap:wrap; padding-bottom:3rem; }
+  .footer-brand{ display:flex; align-items:center; gap:0.8rem; }
+  .footer-brand span{ font-family:'Cormorant Garamond'; font-size:1.3rem; letter-spacing:0.12em; }
+  .footer-cols{ display:flex; gap:4.5rem; flex-wrap:wrap; }
+  .footer-col h4{ font-size:0.74rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--gold-deep); margin-bottom:1rem; font-weight:500; }
+  .footer-col a, .footer-col span.line{ display:block; color:var(--ink-soft); font-size:0.9rem; margin-bottom:0.55rem; }
+  .footer-col a:hover{ color:var(--ink); }
+  .footer-bottom{
+    display:flex; justify-content:space-between; align-items:center;
+    padding-top:2rem; border-top:1px solid var(--line);
+    font-size:0.78rem; color:var(--ink-soft); flex-wrap:wrap; gap:1rem;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:920px){
+    .navlinks{
+      position:fixed; inset:0 0 0 auto; width:78%; max-width:340px;
+      background:var(--cream); flex-direction:column; align-items:flex-start;
+      padding:6.5rem 2.2rem; gap:1.9rem;
+      transform:translateX(100%); transition:transform .4s ease;
+      box-shadow:-8px 0 30px rgba(0,0,0,0.08);
+    }
+    .navlinks.open{ transform:translateX(0); }
+    .navlinks a{ font-size:0.85rem; }
+    .burger{ display:flex; }
+    .heritage .grid, .location .grid{ grid-template-columns:1fr; gap:2.5rem; }
+    .heritage img, .location img{ height:340px; }
+    .rooms-grid{ grid-template-columns:1fr; }
+    .amen-grid{ grid-template-columns:1fr 1fr; }
+  }
+  @media (max-width:560px){
+    .amen-grid{ grid-template-columns:1fr; }
+    .footer-top{ flex-direction:column; }
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }
+  }
+
+  :focus-visible{ outline:2px solid var(--gold-deep); outline-offset:3px; }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <nav class="wrap">
+    <a href="#top" class="brandmark">
+      <svg class="crest" width="30" height="30" viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M50 6 L58 16 L50 12 L42 16 Z"/>
+        <path d="M28 22 L72 22 L72 55 Q72 78 50 90 Q28 78 28 55 Z" stroke-width="2"/>
+        <text x="50" y="60" font-family="Cormorant Garamond, serif" font-size="34" fill="var(--gold-deep)" stroke="none" text-anchor="middle" font-weight="600">A</text>
+      </svg>
+      <span>Hotel August</span>
+    </a>
+    <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="navlinks" id="navlinks">
+      <a href="#top">Inicio</a>
+      <a href="#herencia">Herencia</a>
+      <a href="#habitaciones">Habitaciones</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#ubicacion">Ubicación</a>
+      <a href="#ubicacion" class="cta">Reservar</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero" id="top">
+    <svg class="hero-crest" viewBox="0 0 220 260" aria-hidden="true">
+      <path d="M110 8 L122 24 L110 18 L98 24 Z" stroke-width="2"/>
+      <path d="M60 40 Q40 46 34 70 M60 40 Q42 60 40 90 M60 40 Q46 76 48 110" stroke-width="1.4"/>
+      <path d="M160 40 Q180 46 186 70 M160 40 Q178 60 180 90 M160 40 Q174 76 172 110" stroke-width="1.4"/>
+      <path d="M70 34 L150 34 L150 100 Q150 160 110 190 Q70 160 70 100 Z" stroke-width="2"/>
+      <text x="110" y="128" font-family="Cormorant Garamond, serif" font-size="72" fill="var(--gold-deep)" stroke="none" text-anchor="middle" font-weight="600">A</text>
+    </svg>
+    <p class="eyebrow">Castro · Chiloé · Chile</p>
+    <h1>Hotel August</h1>
+    <p class="sub">Alojamiento de lujo frente a la bahía, donde la arquitectura de Chiloé se encuentra con la hospitalidad clásica.</p>
+    <p class="est">Est. 1892</p>
+    <a href="#ubicacion" class="btn gold">Reservar Estadía</a>
+    <div class="shingles" aria-hidden="true"></div>
+  </section>
+
+  <section class="heritage" id="herencia">
+    <div class="wrap grid">
+      <img class="reveal" src="https://images.unsplash.com/photo-1595877244574-e90ce41ce089?w=1000&q=80" alt="Fachada patrimonial junto al mar en Chiloé">
+      <div class="reveal">
+        <p class="eyebrow">Desde 1892</p>
+        <h2>Una casona con memoria de mar</h2>
+        <p>Hotel August nació como residencia de una familia de armadores en el muelle de Castro, cuando la ciudad todavía se levantaba sobre pilotes frente al canal. Más de un siglo después, conserva la estructura original en alerce y las tejuelas de su fachada, restauradas por artesanos locales.</p>
+        <p>Cada rincón fue pensado para sostener esa doble identidad: la calidez de la arquitectura chilota y el refinamiento discreto de un hotel de tradición europea.</p>
+        <p class="pull">"No restauramos un edificio. Cuidamos una manera de recibir a la gente que ya llevaba cien años funcionando."</p>
+        <hr class="gold-rule">
+      </div>
+    </div>
+  </section>
+
+  <section id="habitaciones">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <p class="eyebrow">Alojamiento</p>
+        <h2>Habitaciones y Suites</h2>
+      </div>
+      <div class="rooms-grid">
+        <article class="room-card reveal">
+          <div class="img-wrap">
+            <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=900&q=80" alt="Habitación Alerce con vista al jardín">
+          </div>
+          <div class="body">
+            <h3>Habitación Alerce</h3>
+            <p>Cama King, maderas nativas y vista al jardín interior. Pensada para estadías serenas.</p>
+            <span class="price">Desde $95.000 CLP / noche</span>
+          </div>
+        </article>
+        <article class="room-card reveal">
+          <div class="img-wrap">
+            <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=900&q=80" alt="Suite Palafito con balcón a la bahía">
+          </div>
+          <div class="body">
+            <h3>Suite Palafito</h3>
+            <p>Balcón privado sobre la bahía de Castro, con salón separado y tina de piedra.</p>
+            <span class="price">Desde $145.000 CLP / noche</span>
+          </div>
+        </article>
+        <article class="room-card reveal">
+          <div class="img-wrap">
+            <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=900&q=80" alt="Suite August, la suite insignia del hotel">
+          </div>
+          <div class="body">
+            <h3>Suite August</h3>
+            <p>La suite insignia: chimenea, tina de mármol y vista panorámica al canal de Chacao.</p>
+            <span class="price">Desde $210.000 CLP / noche</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="amenities" id="servicios">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <p class="eyebrow">Servicios</p>
+        <h2>Comodidades pensadas para el descanso</h2>
+      </div>
+      <div class="amen-grid">
+        <div class="amen-item reveal">
+          <svg viewBox="0 0 40 40"><path d="M8 30 L8 14 Q20 6 32 14 L32 30 Z"/><line x1="8" y1="30" x2="32" y2="30"/><line x1="20" y1="16" x2="20" y2="30"/></svg>
+          <h3>Cocina Chilota</h3>
+          <p>Restaurante con productos de mar y huerta local, curación estacional.</p>
+        </div>
+        <div class="amen-item reveal">
+          <svg viewBox="0 0 40 40"><circle cx="20" cy="14" r="6"/><path d="M8 32 Q20 20 32 32"/></svg>
+          <h3>Spa & Tinaja</h3>
+          <p>Tina de agua caliente, sauna de madera nativa y masajes bajo reserva.</p>
+        </div>
+        <div class="amen-item reveal">
+          <svg viewBox="0 0 40 40"><path d="M6 26 L16 12 L24 22 L30 14 L34 26 Z"/><line x1="6" y1="30" x2="34" y2="30"/></svg>
+          <h3>Terraza Mirador</h3>
+          <p>Vista abierta al canal y a los palafitos, ideal para el atardecer.</p>
+        </div>
+        <div class="amen-item reveal">
+          <svg viewBox="0 0 40 40"><path d="M6 18 Q20 4 34 18"/><path d="M12 24 Q20 14 28 24"/><circle cx="20" cy="30" r="1.6" fill="var(--gold-light)"/></svg>
+          <h3>Concierge & Wifi</h3>
+          <p>Conexión de alta velocidad y asistencia personalizada las 24 horas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="location" id="ubicacion">
+    <div class="wrap grid">
+      <div class="reveal">
+        <p class="eyebrow">Ubicación</p>
+        <h2>En el muelle de Castro</h2>
+        <div class="info-row">
+          <span class="label">Dirección</span>
+          <span class="value">Costanera Pedro Montt, Castro, Chiloé, Chile</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Teléfono</span>
+          <span class="value">+56 65 212 3456</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Correo</span>
+          <span class="value">reservas@hotelaugust.cl</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Recepción</span>
+          <span class="value">Atención 24 horas</span>
+        </div>
+        <a href="mailto:reservas@hotelaugust.cl" class="btn">Enviar Consulta</a>
+      </div>
+      <img class="reveal" src="https://images.unsplash.com/photo-1580237072617-771c3ecc4a24?w=1000&q=80" alt="Vista de los palafitos de Castro al atardecer">
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <svg class="crest" width="26" height="26" viewBox="0 0 100 100" aria-hidden="true">
+          <path d="M28 22 L72 22 L72 55 Q72 78 50 90 Q28 78 28 55 Z" stroke-width="2"/>
+          <text x="50" y="60" font-family="Cormorant Garamond, serif" font-size="34" fill="var(--gold-deep)" stroke="none" text-anchor="middle" font-weight="600">A</text>
+        </svg>
+        <span>Hotel August</span>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Explorar</h4>
+          <a href="#herencia">Herencia</a>
+          <a href="#habitaciones">Habitaciones</a>
+          <a href="#servicios">Servicios</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <span class="line">+56 65 212 3456</span>
+          <span class="line">reservas@hotelaugust.cl</span>
+        </div>
+        <div class="footer-col">
+          <h4>Hotel August</h4>
+          <span class="line">Costanera Pedro Montt</span>
+          <span class="line">Castro, Chiloé, Chile</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Hotel August. Todos los derechos reservados.</span>
+      <span>Est. 1892 — Castro, Chiloé</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav solid background on scroll
+  const header = document.getElementById('siteHeader');
+  const toggleHeader = () => {
+    if (window.scrollY > 40) header.classList.add('solid');
+    else header.classList.remove('solid');
+  };
+  toggleHeader();
+  window.addEventListener('scroll', toggleHeader, { passive: true });
+
+  // Mobile menu
+  const burger = document.getElementById('burger');
+  const navlinks = document.getElementById('navlinks');
+  burger.addEventListener('click', () => {
+    const open = navlinks.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open);
+  });
+  navlinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navlinks.classList.remove('open');
+      burger.setAttribute('aria-expanded', false);
+    });
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
